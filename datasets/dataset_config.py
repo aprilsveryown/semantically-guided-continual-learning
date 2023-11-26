@@ -25,8 +25,7 @@ dataset_config = {
         'pad': 4,
         'crop': 224,
         'flip': True,
-        # 'normalize': (OPENAI_CLIP_MEAN, OPENAI_CLIP_STD),
-        'normalize': ((0.5071, 0.4866, 0.4409), (0.2009, 0.1984, 0.2023))
+        'normalize': (OPENAI_CLIP_MEAN, OPENAI_CLIP_STD),
     },
     'cifar100_icarl': {
         'path': join(_BIG_DATA_PATH, 'cifar100'),
