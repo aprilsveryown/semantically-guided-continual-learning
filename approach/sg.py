@@ -135,11 +135,7 @@ class Appr(Inc_Learning_Appr):
                 max_values, max_indices = torch.max(inter_task_sim, dim=1)  # 取出每行最大值和对应的索引
                 max_values, max_indices = max_values.to(self.device), max_indices.to(self.device)
                 max_values = max_values.unsqueeze(1)
-
                 prev_pred += torch.where(torch.arange(prev_pred.shape[1]).unsqueeze(0).cuda() == max_indices.unsqueeze(1), max_values, -max_values)
-                # prev_pred[torch.arange(prev_pred.size(0)), max_indices] += inter_task_sim[torch.arange(inter_task_sim.size(0)), max_indices]
-                # prev_pred -= max_values.view(-1, 1)
-                # prev_pred[torch.arange(prev_pred.size(0)), max_indices] += inter_task_sim[torch.arange(inter_task_sim.size(0)), max_indices]
                 new_pred = logit_scale * image_features @ prev_text_features.t()
                 kd_loss = self.dist_loss(new_pred, prev_pred.to(self.device))
                 loss = contrastive_loss + self.coef_sl * soft_loss + self.coef_kd * kd_loss
