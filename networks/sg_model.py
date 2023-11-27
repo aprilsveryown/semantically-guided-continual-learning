@@ -150,7 +150,7 @@ class CustomCLIP(BaseIncModel):
         features = []
         labels = []
         for i, (images, captions, targets) in enumerate(loader):
-            feature = self.forward_features(images.to(device))  #
+            feature = self.forward_features(images.to(device))
             if feature.shape[0] == loader.batch_size:
                 labels.append(targets.numpy())
                 features.append(feature.cpu().numpy())
