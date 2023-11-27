@@ -132,7 +132,7 @@ class Appr(Inc_Learning_Appr):
 
                 prev_pred = logit_scale * features_old @ prev_text_features.t()
                 inter_task_sim = inter_task_sim.type(torch.HalfTensor).to(self.device)
-                max_values, max_indices = torch.max(inter_task_sim, dim=1)  # 取出每行最大值和对应的索引
+                max_values, max_indices = torch.max(inter_task_sim, dim=1)
                 max_values, max_indices = max_values.to(self.device), max_indices.to(self.device)
                 max_values = max_values.unsqueeze(1)
                 prev_pred += torch.where(torch.arange(prev_pred.shape[1]).unsqueeze(0).cuda() == max_indices.unsqueeze(1), max_values, -max_values)
